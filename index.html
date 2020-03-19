@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: content-box;
+  width: 100%;
+}
+
+body {
+  background-color: rgb(203, 245, 247);
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  object-fit: fill;
+  position: relative;
+}
+
+#myImage {
+  object-fit: fill;
+  position: relative;
+  width: 100%;
+}
+
+.content {
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: #f1f1f1;
+  width: 100%;
+  padding: 20px;
+}
+
+#myBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#myBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+#changeBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#changeBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+#cleanerBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#cleanerBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+#nextPlayerBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#nextPlayerBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
+
+#backBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#backBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
+</style>
+</head>
+<body id="myBody">
+
+<video autoplay muted loop id="myVideo">
+  <source src="StartingScreen.mp4" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+
+
+<div class="content">
+  <button id="backBtn" onclick="backFunction()">Back</button>
+  <button id="myBtn" onclick="myFunction()">Pause</button>
+  <button id="changeBtn" onclick="dirtierVideo()">Dirtier</button>
+  <button id="cleanerBtn" onclick="cleanerVideo()">Cleaner</button>
+  <button id="nextPlayerBtn" onclick="nextPlayerVideo()">NextPlayer</button>
+</div>
+
+<script>
+  
+var video = document.getElementById("myVideo");
+var btn = document.getElementById("myBtn");
+var body = document.getElementById("myBody");
+body.background = "penguin.png";
+
+var menuScreens = ["ocean.mp4" , "Ocean2.m4v", "Ocean3.m4v", "Ocean4.m4v", "Ocean5.m4v"];
+var playerEvents = [["whalefood.m4v" , "whaletrash.m4v"],
+                    ["octopusfood.m4v" , "octopustrash.m4v"],
+                    ["crabfood.mp4" , "crabtrash.m4v"],
+                    ["fishfood.m4v", "fishtrash.m4v"],
+                    ["sealfood.m4v", "sealtrash.m4v"]];
+var currentScreen = "ocean.mp4";
+var isPlayerScreen = false;
+var count = 0;
+var turn = 0;
+
+function backFunction() {
+  if(isPlayerScreen) {
+    video.src = currentScreen;
+    isPlayerScreen = false;
+  }
+}
+
+function dirtierVideo() {       
+    if(count < menuScreens.length - 1) {
+      count++;
+      currentScreen = menuScreens[count];
+      video.src = currentScreen;
+      video.load();     
+      isPlayerScreen = false;
+    }
+
+}
+
+function cleanerVideo() {    
+    if(count > 0) {
+      count--;
+      currentScreen = menuScreens[count];
+      video.src = currentScreen;
+      isPlayerScreen = false;
+    }
+
+}
+
+function nextPlayerVideo() {  
+    isPlayerScreen = true;  
+    var rand = Math.floor(Math.random() * 2);
+    video.src = playerEvents[turn][rand];
+    turn++;
+    if(turn >= playerEvents.length) {
+      turn = 0;
+    }
+}
+
+function myFunction() {
+  if (video.paused) {
+    video.play();
+    btn.innerHTML = "Pause";
+  } else {
+    video.pause();
+    btn.innerHTML = "Play";
+  }
+}
+</script>
+
+</body>
+</html>
