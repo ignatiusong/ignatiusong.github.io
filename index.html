@@ -20,12 +20,6 @@ body {
   position: relative;
 }
 
-#myImage {
-  object-fit: fill;
-  position: relative;
-  width: 100%;
-}
-
 .content {
   position: fixed;
   bottom: 0;
@@ -109,6 +103,21 @@ body {
   background: #ddd;
   color: rgb(0, 0, 0);
 }
+
+#eventBtn {
+  width: 200px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#eventBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
 </style>
 </head>
 <body id="myBody">
@@ -118,6 +127,8 @@ body {
   Your browser does not support HTML5 video.
 </video>
 
+<img id="myImage" src="mockupscreens/netsscreens-01.jpg">
+
 
 <div class="content">
   <button id="backBtn" onclick="backFunction()">Back</button>
@@ -125,31 +136,40 @@ body {
   <button id="changeBtn" onclick="dirtierVideo()">Dirtier</button>
   <button id="cleanerBtn" onclick="cleanerVideo()">Cleaner</button>
   <button id="nextPlayerBtn" onclick="nextPlayerVideo()">NextPlayer</button>
+  <button id="eventBtn" onclick="showEventImage()">EndRoundEvent</button>
 </div>
 
 <script>
   
 var video = document.getElementById("myVideo");
 var btn = document.getElementById("myBtn");
-var body = document.getElementById("myBody");
-body.background = "penguin.png";
+var image = document.getElementById("myImage");
 
+//image.width = 1080;
+//image.height = 720;
+
+var endRoundEvents = ["netsscreens-01.jpg" , "netsscreens-02.jpg", "netsscreens-03.jpg" , "netsscreens-04.jpg" , "netsscreens-05.jpg" , "netsscreens-06.jpg",
+                        "pollutedscreens-01.jpg" , "pollutedscreens-02.jpg", "pollutedscreens-03.jpg", "pollutedscreens-04.jpg", "pollutedscreens-05.jpg",
+                        "pollutedscreens-06.jpg", "pollutedscreens-07.jpg", "pollutedscreens-08.jpg", "pollutedscreens-09.jpg", "pollutedscreens-10.jpg",
+                      "solutionscreens-01.jpg" , "solutionscreens-02.jpg" , "solutionscreens-03.jpg", "solutionscreens-01.jpg"];
 var menuScreens = ["ocean.mp4" , "Ocean2.m4v", "Ocean3.m4v", "Ocean4.m4v", "Ocean5.m4v"];
 var playerEvents = [["whalefood.m4v" , "whaletrash.m4v"],
                     ["octopusfood.m4v" , "octopustrash.m4v"],
                     ["crabfood.mp4" , "crabtrash.m4v"],
                     ["fishfood.m4v", "fishtrash.m4v"],
                     ["sealfood.m4v", "sealtrash.m4v"]];
+
 var currentScreen = "ocean.mp4";
 var isPlayerScreen = false;
 var count = 0;
 var turn = 0;
 
 function backFunction() {
-  if(isPlayerScreen) {
-    video.src = currentScreen;
-    isPlayerScreen = false;
-  }
+  image.src = "";
+  video.src = currentScreen;
+  isPlayerScreen = false;
+  video.scrollIntoView();
+  
 }
 
 function dirtierVideo() {       
@@ -181,6 +201,13 @@ function nextPlayerVideo() {
     if(turn >= playerEvents.length) {
       turn = 0;
     }
+}
+
+function showEventImage() {
+  isPlayerScreen = false;
+  var rand = Math.floor(Math.random() * endRoundEvents.length);
+  image.src = "mockupscreens/" + endRoundEvents[rand];
+  setTimeout(function() {image.scrollIntoView()} , 200);
 }
 
 function myFunction() {
