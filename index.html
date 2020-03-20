@@ -30,7 +30,7 @@ body {
 }
 
 #myBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -45,7 +45,7 @@ body {
 }
 
 #changeBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -60,7 +60,7 @@ body {
 }
 
 #cleanerBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -75,7 +75,7 @@ body {
 }
 
 #nextPlayerBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -90,7 +90,7 @@ body {
 }
 
 #backBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -105,7 +105,7 @@ body {
 }
 
 #eventBtn {
-  width: 200px;
+  width: 100px;
   font-size: 18px;
   padding: 10px;
   border: none;
@@ -118,12 +118,27 @@ body {
   background: #ddd;
   color: rgb(0, 0, 0);
 }
+
+#treasureBtn {
+  width: 100px;
+  font-size: 18px;
+  padding: 10px;
+  border: none;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+#treasureBtn:hover {
+  background: #ddd;
+  color: rgb(0, 0, 0);
+}
 </style>
 </head>
 <body id="myBody">
 
 <video autoplay muted loop id="myVideo">
-  <source src="StartingScreen.mp4" type="video/mp4">
+  <source src="videos/ocean.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -135,8 +150,9 @@ body {
   <button id="myBtn" onclick="myFunction()">Pause</button>
   <button id="changeBtn" onclick="dirtierVideo()">Dirtier</button>
   <button id="cleanerBtn" onclick="cleanerVideo()">Cleaner</button>
-  <button id="nextPlayerBtn" onclick="nextPlayerVideo()">NextPlayer</button>
-  <button id="eventBtn" onclick="showEventImage()">EndRoundEvent</button>
+  <button id="nextPlayerBtn" onclick="nextPlayerVideo()">Next Player</button>
+  <button id="eventBtn" onclick="showEventImage()">End Round</button>
+  <button id="treasureBtn" onclick="treasureVideo()">Treasure</button>
 </div>
 
 <script>
@@ -155,14 +171,18 @@ var endRoundEvents = ["netsscreens-01.jpg" , "netsscreens-02.jpg", "netsscreens-
 var menuScreens = ["ocean.mp4" , "Ocean2.m4v", "Ocean3.m4v", "Ocean4.m4v", "Ocean5.m4v"];
 var playerEvents = [["whalefood.m4v" , "whaletrash.m4v"],
                     ["octopusfood.m4v" , "octopustrash.m4v"],
-                    ["crabfood.mp4" , "crabtrash.m4v"],
                     ["fishfood.m4v", "fishtrash.m4v"],
-                    ["sealfood.m4v", "sealtrash.m4v"]];
+                    ["sealfood.m4v", "sealtrash.m4v"],
+                    ["crabfood.mp4" , "crabtrash.m4v"],      
+                    ["rayfood.m4v" , "raytrash.m4v"]              
+                    ];
 
-var currentScreen = "ocean.mp4";
+var currentScreen = "videos/ocean.mp4";
 var isPlayerScreen = false;
+var sinkingEventTiming = 300000
 var count = 0;
 var turn = 0;
+setTimeout(sinkingVideo , sinkingEventTiming);
 
 function backFunction() {
   image.src = "";
@@ -172,10 +192,15 @@ function backFunction() {
   
 }
 
+function sinkingVideo() {
+  video.src = "videos/sinking.m4v";
+  setTimeout(sinkingVideo ,sinkingEventTiming);
+}
+
 function dirtierVideo() {       
     if(count < menuScreens.length - 1) {
       count++;
-      currentScreen = menuScreens[count];
+      currentScreen = "videos/" + menuScreens[count];
       video.src = currentScreen;
       video.load();     
       isPlayerScreen = false;
@@ -186,7 +211,7 @@ function dirtierVideo() {
 function cleanerVideo() {    
     if(count > 0) {
       count--;
-      currentScreen = menuScreens[count];
+      currentScreen = "videos/" + menuScreens[count];
       video.src = currentScreen;
       isPlayerScreen = false;
     }
@@ -196,18 +221,23 @@ function cleanerVideo() {
 function nextPlayerVideo() {  
     isPlayerScreen = true;  
     var rand = Math.floor(Math.random() * 2);
-    video.src = playerEvents[turn][rand];
+    video.src = "videos/" + playerEvents[turn][rand];
     turn++;
     if(turn >= playerEvents.length) {
       turn = 0;
     }
 }
 
+function treasureVideo() {
+  isPlayerScreen = true;
+  video.src = "videos/treasure.mp4";
+}
+
 function showEventImage() {
   isPlayerScreen = false;
   var rand = Math.floor(Math.random() * endRoundEvents.length);
   image.src = "mockupscreens/" + endRoundEvents[rand];
-  setTimeout(function() {image.scrollIntoView()} , 200);
+  setTimeout(function() {image.scrollIntoView()} , 100);
 }
 
 function myFunction() {
