@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 * {
-  box-sizing: content-box;
+  box-sizing: content-box; 
   width: 100%;
 }
 
@@ -23,7 +23,6 @@ body {
 .content {
   position: fixed;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
   color: #f1f1f1;
   width: 100%;
   padding: 20px;
@@ -137,7 +136,7 @@ body {
 </head>
 <body id="myBody">
 
-<video autoplay muted loop id="myVideo">
+<video autoplay loop id="myVideo">
   <source src="videos/mainscreen/ocean.m4v" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
@@ -146,7 +145,6 @@ body {
 
 <div class="content">
   <button id="backBtn" onclick="backFunction()">Back</button>
-  <button id="myBtn" onclick="myFunction()">Pause</button>
   <button id="changeBtn" onclick="dirtierVideo()">Dirtier</button>
   <button id="cleanerBtn" onclick="cleanerVideo()">Cleaner</button>
   <button id="nextPlayerBtn" onclick="nextPlayerVideo()">Next Player</button>
@@ -160,22 +158,17 @@ var video = document.getElementById("myVideo");
 var btn = document.getElementById("myBtn");
 var mainscreenLocation = "videos/mainscreen/"
 
-var environmentalEvents = ["beachcleanup.m4v" , "recycle.m4v" , "reusablebag.m4v" , "reusablecup.m4v"]; //30%
+var environmentalEvents = ["beachcleanuplifebuoy.m4v" , "recyclelifebuoy.m4v" , "reusablebaglifebuoy.m4v" , "reusablecuplifebuoy.m4v"]; //30%
 var pollutionEvents = ["bbqlitter.m4v" , "factorywaste.m4v" , "lostshipping.m4v", "oilspill.m4v", "towntrash.m4v"]; //60%
-var randomEvents = ["crabnet.m4v" , "earthquake.m4v" , "fishnet.m4v", "octopusnet.m4v",
-                      "overfishing.m4v" , "raynet.m4v", "sealnet.m4v", "whalenet.m4v"]; //10%
+var randomEvents = [ "earthquake.m4v" , "overfishing.m4v"]; //10%
 
-var endRoundEvents = ["netsscreens-01.jpg" , "netsscreens-02.jpg", "netsscreens-03.jpg" , "netsscreens-04.jpg" , "netsscreens-05.jpg" , "netsscreens-06.jpg",
-                        "pollutedscreens-01.jpg" , "pollutedscreens-02.jpg", "pollutedscreens-03.jpg", "pollutedscreens-04.jpg", "pollutedscreens-05.jpg",
-                        "pollutedscreens-06.jpg", "pollutedscreens-07.jpg", "pollutedscreens-08.jpg", "pollutedscreens-09.jpg", "pollutedscreens-10.jpg",
-                      "solutionscreens-01.jpg" , "solutionscreens-02.jpg" , "solutionscreens-03.jpg", "solutionscreens-01.jpg"];
 var menuScreens = ["ocean.m4v" , "ocean2.m4v", "ocean3.m4v", "ocean4.m4v", "ocean5.m4v"];
-var playerEvents = [["whalefood.m4v" , "whaletrash.m4v"],
-                    ["octopusfood.m4v" , "octopustrash.m4v"],
-                    ["fishfood.m4v", "fishtrash.m4v"],
-                    ["sealfood.m4v", "sealtrash.m4v"],
-                    ["crabfood.m4v" , "crabtrash.m4v"],      
-                    ["rayfood.m4v" , "raytrash.m4v"]              
+var playerEvents = [["whalefood.m4v" , "whaletrash.m4v", "whalenet.m4v"],
+                    ["octopusfood.m4v" , "octopustrash.m4v", "octopusnet.m4v"],
+                    ["fishfood.m4v", "fishtrash.m4v", "fishnet.m4v"],
+                    ["sealfood.m4v", "sealtrash.m4v", "sealnet.m4v"],
+                    ["crabfood.mp4" , "crabtrash.m4v", "crabnet.m4v"],      
+                    ["rayfood.m4v" , "raytrash.m4v", "raynet.m4v"]              
                     ];
                     
 
@@ -214,8 +207,14 @@ function cleanerVideo() {
 }
 
 function nextPlayerVideo() {  
-    var rand = generateRandInt(0,2);
-    video.src = mainscreenLocation + playerEvents[turn][rand];
+    var prob = generateRandInt(1,101);
+    if(prob <= 40) {      
+      video.src = mainscreenLocation + playerEvents[turn][0];
+    } else if(prob <= 80) {
+      video.src = mainscreenLocation + playerEvents[turn][1];
+    } else {
+      video.src = mainscreenLocation + playerEvents[turn][2];
+    }
     turn++;
     if(turn >= playerEvents.length) {
       turn = 0;
