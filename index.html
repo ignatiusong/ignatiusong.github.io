@@ -137,7 +137,7 @@ body {
 <body id="myBody">
 
 <video autoplay loop id="myVideo">
-  <source src="videos/mainscreen/ocean.m4v" type="video/mp4">
+  <source src="videos/mainscreen/ocean1.mp4" type="video/mp4">
   Your browser does not support HTML5 video.
 </video>
 
@@ -158,17 +158,17 @@ var video = document.getElementById("myVideo");
 var btn = document.getElementById("myBtn");
 var mainscreenLocation = "videos/mainscreen/"
 
-var environmentalEvents = ["beachcleanuplifebuoy.m4v" , "recyclelifebuoy.m4v" , "reusablebaglifebuoy.m4v" , "reusablecuplifebuoy.m4v"]; //30%
-var pollutionEvents = ["bbqlitter.m4v" , "factorywaste.m4v" , "lostshipping.m4v", "oilspill.m4v", "towntrash.m4v"]; //60%
-var randomEvents = [ "earthquake.m4v" , "overfishing.m4v"]; //10%
+var environmentalEvents = ["beachcleanup.mp4" , "recycle.mp4" , "reusablebag.mp4" , "reusablecup.mp4"]; //30%
+var pollutionEvents = ["bbqlitter.mp4" , "factorywaste.mp4" , "lostshipping.mp4", "oilspill.mp4", "towntrash.mp4"]; //60%
+var randomEvents = [ "earthquake.mp4" , "overfishing.mp4"]; //10%
 
-var menuScreens = ["ocean.m4v" , "ocean2.m4v", "ocean3.m4v", "ocean4.m4v", "ocean5.m4v"];
-var playerEvents = [["whalefood.m4v" , "whaletrash.m4v", "whalenet.m4v"],
-                    ["octopusfood.m4v" , "octopustrash.m4v", "octopusnet.m4v"],
-                    ["fishfood.m4v", "fishtrash.m4v", "fishnet.m4v"],
-                    ["sealfood.m4v", "sealtrash.m4v", "sealnet.m4v"],
-                    ["crabfood.mp4" , "crabtrash.m4v", "crabnet.m4v"],      
-                    ["rayfood.m4v" , "raytrash.m4v", "raynet.m4v"]              
+var menuScreens = ["ocean1.mp4" , "ocean2.mp4", "ocean3.mp4", "ocean4.mp4", "ocean5.mp4"];
+var playerEvents = [["whalefood.mp4" , "whaletrash.mp4", "whalenet.mp4"],
+                    ["octopusfood.mp4" , "octopustrash.mp4", "octopusnet.mp4"],
+                    ["fishfood.mp4", "fishtrash.mp4", "fishnet.mp4"],
+                    ["sealfood.mp4", "sealtrash.mp4", "sealnet.mp4"],
+                    ["crabfood.mp4" , "crabtrash.mp4", "crabnet.mp4"],      
+                    ["rayfood.mp4" , "raytrash.mp4", "raynet.mp4"]              
                     ];
                     
 
@@ -183,7 +183,7 @@ function backFunction() {
 }
 
 function sinkingVideo() {
-  video.src = mainscreenLocation +  "sinking.m4v";
+  video.src = mainscreenLocation +  "sinking.mp4";
   setTimeout(sinkingVideo ,sinkingEventTiming);
 }
 
@@ -222,7 +222,7 @@ function nextPlayerVideo() {
 }
 
 function treasureVideo() {
-  video.src = mainscreenLocation + "treasure.m4v";
+  video.src = mainscreenLocation + "treasure.mp4";
 }
 
 function eventVideo() {
